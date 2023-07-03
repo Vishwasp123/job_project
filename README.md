@@ -24,7 +24,4 @@ Things you may want to cover:
 * ...
 # job_projects
 # job_projects
-# job_projects
-# job_projects
-# job_projects
-# job_project
+
