@@ -1,0 +1,53 @@
+<div class="col-md-12">
+  <div class="container-fluid mt-4">
+    <div class="justify-content-center">
+      <div class="container">
+        <p><%= notice  %></p>
+        <div class="card text-center ">
+          <div class="card-header">Job Categories Details</div>
+          <div class="card-body">
+            <p class="card-title"><strong>Name:</strong><%= @job_category.name %></p>
+          </div>
+
+          <div class="card-footer text-muted">
+            <% if user_signed_in?%>
+            <%= link_to 'Back', admin_job_categories_path ,class:"btn btn-primary" %> |
+            <% else %>
+            <%= link_to 'Back', root_path, class:"btn btn-primary" %>
+            <% end %>
+            <% if user_signed_in? %>
+            <%= link_to 'Edit', edit_admin_job_category_path ,class:"btn btn-primary" %> |
+            <%= link_to 'Delete', admin_job_category_path(@job_category) , data:{turdo_confirm:'Are you sure?',turbo_method: :delete} ,class:"btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="container ">
+  <div class="row ">
+    <% @job_category.jobs.each do |job| %>
+    <div class="col-md-4">
+      <div class="card m-2 mt-2">
+        <div class="card-body">
+          <h5 class="card-title"><%= job.title %></h5>
+          <p class="card-text">
+            <p><strong> Job Category:  </strong> <%= job.job_category.name %> </p>
+            <p><strong> Employee Type:  </strong> <%= job.employee_type%> </p>
+            <p><strong> Location Type : </strong> <%= job.location_type%> </p>
+            <p><strong> Salary : </strong> <%= job.salary%></p>
+            <p><strong> Link to apply:  </strong><a href="  "> <%= job.link_to_apply%></a> </p>  
+            <p><strong> Description:  </strong> <%= job.description%> </p>
+            <p><strong> Max Position: </strong> <%= job.max_position%> </p>
+            <p><strong> Qualification:  </strong> <%= job.qualification%> </p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+

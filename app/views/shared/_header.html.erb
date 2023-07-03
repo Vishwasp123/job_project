@@ -1,0 +1,73 @@
+  <div class="navbar-position ">
+ <div class="col-md-12 ">
+    <nav class="navbar navbar-expand-lg navbar-light  ">
+      <div class="container-fluid">
+        <div class="  ">
+          <%= link_to image_tag("job3.jpg"),root_path,class:"logo-img logo1 navbar-brand " %>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <% if user_signed_in? %>
+              <%= link_to "Job_category" , admin_job_categories_path, class:"nav-link active" %>
+
+              <% else %>
+              <%= link_to "Login ", new_user_session_path , class:"nav-link" %>
+
+              <%  end %>
+            </li>
+            <li class="nav-item active">
+              <% if user_signed_in? %>
+
+              <%= link_to "Signout",destroy_user_session_path, data: { turbo_method: :delete } ,class:"nav-link " %>
+
+              <% end %>
+            </li>
+
+            <li class="nav-item">
+              <%if user_signed_in? %>
+              <%= link_to "My Job" , admin_my_jobs_path , class:"nav-link active" %>
+              <%  end %>
+
+            </li>
+
+            <li class="nav-item">
+             <%= link_to "All Jobs" , admin_jobs_path ,class:"nav-link active "%>
+
+           </li>
+           <li class="nav-item dropdown ">
+            <a class="nav-link dropdown-toggle active " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Job Category
+            </a>
+
+
+            <ul class="dropdown-menu m-0" aria-labelledby="navbarDropdown">
+
+              <% @job_categories.each do |job_category| %>        
+              <li><%= link_to job_category.name , admin_job_category_path(job_category),target: :_blank,class:"dropdown-item m-0" %>
+              </a></li>
+              <% end %>
+            </ul> 
+          </li>
+        </ul>
+      </div>
+
+
+      <form class="d-flex justify-content-end">
+        <% if @q %>
+        <%= search_form_for @q , url: :admin_jobs  do|form| %>
+        <%= form.label :title_cont , 'Title' ,class:"form-label m-1" %>
+        <%= form.search_field :job_category_name_cont,class:'form-control me-2' ,placeholder: "jobs " %>
+        <%= form.submit class:"btn btn-outline-success" %>
+        <% end %>
+        <% end %>
+      </form>
+    </div>
+  </nav>
+</div>
+</div>
+

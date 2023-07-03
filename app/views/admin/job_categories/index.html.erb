@@ -1,0 +1,39 @@
+  <div class="col-md-12">
+    <div class="container mt-2">
+      <%= link_to "New Job_Category",  new_admin_job_category_path ,class:"btn btn-primary mb-3" %>
+      <p><%= notice %></p>
+      <table class="table">
+        <thead>
+          <div class="col-md-6">
+            <tr class="m-0">
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Action</th>
+            </tr>
+          </div>
+        </thead>
+        <tbody>
+          <% @job_categories.each do |job_category| %>
+          <tr class="m-0">
+
+            <td><%= job_category.id %></td>
+            <td><%= job_category.name%></td>
+            <td><%= link_to "View", admin_job_category_path(job_category) ,class:"btn btn-primary" %>  </td>
+            
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+

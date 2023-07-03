@@ -1,0 +1,62 @@
+<div class="m-0">
+  <%= link_to "Create Job" , new_admin_job_path ,class:"btn btn-primary mb-2" %>
+</div>
+<h1 class="row1"> My Jobs</h1>
+<div class="container ">
+  <div class="row ">
+    <% @jobs.each do |job| %>
+      
+    <div class="col-md-4 mb-4">
+      <div class="card" style="width: 18rem;">
+        <% if job.company_image.attached? %>
+        <%= image_tag job.company_image ,class:"card-img-top" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title">Job Details</h5>
+        </div>
+
+        <ul class="list-group list-group-light list-group-small">
+
+          <li class="list-group-item px-4 "><p><strong> Job Status:   </strong><span class="text-danger"> <%= job.status  %> </span></p></li>
+
+          <li class="list-group-item px-4"><p><strong> Job Category:   </strong> <%= job.job_category.name%> </p></li>
+
+          <li class="list-group-item px-4"><p><strong> Employee Type:  </strong> <%= job.employee_type%> </p></li>
+
+          <li class="list-group-item px-4"><p><strong> Location Type : </strong> <%= job.location_type%> </p></li>
+
+          <li class="list-group-item px-4"><p><strong> Salary : </strong> <%= job.salary%></p></li>
+
+          <li class="list-group-item px-4"> <p><strong> Link to apply:  </strong><a href="  "> <%= job.link_to_apply%></a> </p> </li>
+
+          <li class="list-group-item px-4"><p><strong> Description:  </strong> <%= job.description%> </p></li>
+
+          <li class="list-group-item px-4">
+            <p><strong> Max Position: </strong> <%= job.max_position%> </p></li>
+
+            <li class="list-group-item px-4"><p><strong> Qualification:  </strong> <%= job.qualification%> </p></li>
+
+          </ul>
+
+          <div class="card-body">
+            <%= link_to "Back", admin_jobs_url ,class:"btn btn-primary card-link"%> |
+            <%= link_to "Edit", edit_admin_job_path(job[:id]) ,class:"btn btn-primary card-link " %> |
+            <%= link_to 'Delete ', admin_job_path(job[:id]), data: {
+              turbo_confirm: 'Are you Sure?', turbo_method: :delete } ,class:"btn btn-primary card-link" %>
+            </div>
+          </div>
+        </div>
+        
+        <% end %>
+      </div>
+
+      <%= paginate @jobs %>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,53 @@
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        
+        <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid" alt="Sample image"> -->
+
+          <%= image_tag("jobs.jpeg", {:style => "width:100%;"}) %>
+        
+
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <form>
+            <h2> Login In</h2>
+
+            <!-- Email input -->
+
+            <div class="form-outline mb-4">
+              <%= f.label :email ,class:"form-label" %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control form-control-lg" %>
+            </div>
+            <!-- Password input -->
+
+            <div class="form-outline mb-4">
+              <%= f.label :password , class:"form-label" %><br />
+              <%= f.password_field :password, autocomplete: "current-password" ,class:"form-control form-control-lg" %>        
+            </div>
+
+            <!-- Checkbox -->
+            <% if devise_mapping.rememberable? %>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="form-check mb-0">
+                <%= f.check_box :remember_me ,class:"form-check-input me-2" %>
+                <%= f.label :remember_me ,class:"form-check-label" %>
+              </div>
+              <% end %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit class:"btn btn-primary" %> <br>
+              <%= render "users/shared/links" %>    
+            </div>
+            <% end %>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+

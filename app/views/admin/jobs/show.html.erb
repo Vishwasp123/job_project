@@ -1,0 +1,60 @@
+
+<div class="col-md-12">
+  <div class="container justify-content-center">
+    <i class=" fas fa-regular fa-backward" style="color: #3b06b7;">
+      <%= link_to "Back", admin_jobs_url ,class:"btn btn-primary card-link mb-2 "%></i>
+      <div class="card mb-3 ">
+        <div class="row g-0">
+          <div class="col-md-4" >
+            <div class="d-flex container">    
+              <% if @job.company_image.attached? %>
+              <%= image_tag @job.company_image ,class:"img-1 img-fluid" %>
+              <% else %>
+              <%= image_tag('image_not.png',class:"img-1 img-fluid")%>
+              <% end %> 
+            </div>        
+          </div>
+          <div class="col-md-6 col-sm-8">
+            <div class="card-body ">
+              <h5 class="card-title "><%= @job.job_category.name%></h5>
+              <div class="d-flex">
+                <span class="badge bg-primary bg-lg basdge-1"><%= @job.title  %></span >
+
+                <span class="badge bg-primary bg-lg basdge-1 ms-2"><%= @job.qualification  %></span>
+              </div>
+              <div class="d-flex mt-2">
+              <span class="badge bg-primary bg-lg basdge-1 mt-2"><%= @job.employee_type  %></span> 
+
+                <span class="badge bg-primary bg-lg basdge-1 mt-2 ms-2 "><%= @job.location_type  %></span>
+              
+            </div>
+            <div class="d-inline-flex mt-3" >
+              <p>Salary: <br><span class="badge bg-primary d-inline-flex badge-1"> <%= @job.salary  %></span>
+              </p>
+            </div>
+            <div class="d-inline-flex m-2">
+              <p>Max Position:<br> <span class="badge badge-1 bg-primary d-inline-flex ms-2"><%= @job.max_position  %></span></p>
+            </div>
+
+            <div class="d-flex mb-2">
+              <p class="card-text"> Link to Apply:<br><a href=""><span class="badge bg-primary bg-lg d-inline-flex "><%= @job.link_to_apply  %></span></a>
+              </p>
+            </div>
+
+            <div class="">
+              <p>Description:<br><%=  @job.description  %></span></p>
+            </div>
+
+          </p>
+          <a href="#" class="btn btn-danger btn-1 btn-lg " tabindex="-1" role="button" aria-disabled="true">Apply</a>
+          <p class="card-text">
+            <small class="text-muted"> Last Update 3 mins ago</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+

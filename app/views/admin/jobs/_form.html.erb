@@ -1,0 +1,65 @@
+  <%= form_with model: [:admin, job], html: { data: { turbo: false } } do |form| %>
+
+  <%= render 'admin/shared/error', model: job %>
+
+  <div>
+    <%= form.label :status %><br>
+    <%= form.select :status, ['public', 'archived'], selected: 'public' %>
+  </div>
+
+  <%= form.hidden_field :job_post_id, value: current_user.id %>
+
+  <p class="text-danger"> * must be presence</p>
+
+  <div >
+    <%= form.label :title ,class:"form group"%> <span class="text-danger">*</span>
+    <%= form.text_field :title ,class:'form-control form-control-lg' %>
+  </div>
+
+  <%= form.label :job_category_id ,'Job_category ' ,class:"form group mt-2" %><span class="text-danger">*</span>
+  <%#= form.select :job_category_id, options_for_select(JobCategory.pluck(:name, :id),selected: 'job.job_category_id') ,{prompt: 'select job_category'} ,{class:'form-select form-select-lg rounded-0'} %>
+  <%= form.select :job_category_id, options_for_select(JobCategory.all.map {|job_category|[job_category.name,job_category.id]},selected: 'job.job_category_id') ,{prompt: 'select job_category'} ,{class:'form-select form-select-lg  rounded-0'} %>
+
+
+  <div class="forn-group my-3">
+    <%= form.label :employee_type ,'Employee Type:' ,class:"form group  " %><span class="text-danger">*</span>
+    <%= form.radio_button :employee_type, 'Full_time' ,class:"ms-4" %>
+    <%= form.label :full_time, 'Full_time'  ,class:"form group me-3" %>
+    <%= form.radio_button :employee_type, 'Half_time' ,class:"ms-4" %>
+    <%= form.label :half_time, 'Half_time'  ,class:"form group me-3" %>
+  </div>
+
+  <div class="forn-group my-3">
+    <%= form.label :location_type ,'location Type:' ,class:"form group" %><span class="text-danger">*</span>
+    <%= form.radio_button :location_type, 'india'  ,class:"ms-4"%>
+    <%= form.label :india, 'India'  ,class:"form group" %>
+    <%= form.radio_button :location_type, 'USA'  ,class:"ms-4" %>
+    <%= form.label :location_type, 'USA'  ,class:"form group"%>
+    <%= form.radio_button :location_type, 'Austrilia' ,class:"ms-4" %>
+    <%= form.label :location_type, 'Austrilia' ,class:"form group" %>
+  </div>
+
+  <%= form.label :salary ,'Salary in Rs:',class:" form select mb-2  " %><span class="text-danger">*</span> 
+
+  <%= form.select :salary, options_for_select(Job::SALARIES), {prompt: 'Select salary type'},{class:'form-select form-select-lg rounded-0'} %>
+
+  <div class="forn-group">
+    <%= form.label :link_to_apply ,'Link to Apply',class:"form group" %><span class="text-danger m-0">*<br>(https://(a-z 0-9.in/com)</span>
+    <%= form.text_field :link_to_apply ,class:'form-control form-control-lg'%>
+
+  </div>
+
+  <%= form.label :description , 'Description' ,class:"form group"%><span class="text-danger">*</span>
+  <%=  form.text_area :description  ,class:'form-control form-control-lg' %>
+
+  <%= form.label :max_position, 'Position' ,class:"form group" %><span class="text-danger">*</span>
+  <%= form.text_field :max_position ,class:'form-control form-control-lg'%>
+
+  <%= form.label :qualification, 'Qualification' ,class:"form group" %><span class="text-danger">*</span>
+  <%= form.text_field :qualification ,class:'form-control form-control-lg'%>
+
+  <%= form.label :company_image, 'Company image' ,class:"form group mb-2" %><span class="text-danger">*</span> <br>
+  <%= form.file_field :company_image  %><br>
+
+  <%= form.submit class:"btn btn-warning btn-lg ms-2 mt-2" %>
+<% end %>
