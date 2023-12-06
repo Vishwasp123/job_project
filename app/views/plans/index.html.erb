@@ -1,0 +1,40 @@
+<% plan_ids = current_user.user_plans.pluck(:plan_id).uniq %>
+<div class="col-lg-8 mx-auto">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title text-center">Subsription Plan</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @plans.each do |plan| %>
+    <div class="col-lg-6">
+      <ul class="list-group">
+        <li class="list-group-item mt-3 mb-3" aria-current="true"> 
+          <div class="row">
+            <div class="mb-2 col-lg-6">
+              <strong> <%= plan.name  %> </strong> 
+            </div>
+            <div class="mb-2 col-lg-6">
+              <strong>$<%= plan.price  %></strong>
+            </div>
+            <div class="col-lg-12">
+              <% if plan.user_plans.present? %>
+              <p class= "text-danger m-2"> Plan valid for <%= current_user.user_plans.first.remaining_days %> days</p>
+              <% else %>
+              <p class=" text-danger m-2"><%= plan.validity %></p>
+              <% end %>
+            </div>
+          </div>
+
+          <% if plan.user_plans.present? %>
+          <p><span class="btn btn-outline-primary">Active</span></p>
+          <% else %> 
+          <%= link_to 'View Plan', plan, class: 'btn btn-primary btn-sm' %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <% end %>
+  </div>  
+</div>

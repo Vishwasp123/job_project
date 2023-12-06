@@ -1,8 +1,10 @@
 class WelcomeController < ApplicationController
-  def index
-   @job_categories = JobCategory.all
-       helpers.time_to_s(:humanized_ago)
-   @latest_jobs = Job.order("created_at DESC").limit(10).only(:order)
 
+  WELCOME_PAGE = 10
+  def index
+  
+   @job_categories = JobCategory.all
+   @latest_jobs = Job.includes(:job_category).order("created_at DESC").limit(WELCOME_PAGE).only(:order).page params[:page]
+   
  end
 end

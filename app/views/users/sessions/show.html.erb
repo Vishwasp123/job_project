@@ -1,0 +1,7 @@
+
+  <h2>Active Plan:</h2>
+<% if current_user.active_plan.present? %>
+  <p><%= current_user.active_plan.name %></p>
+<% else %>
+  <p>No active plan.</p>
+<% end %>

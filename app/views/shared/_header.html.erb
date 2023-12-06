@@ -1,8 +1,8 @@
   <div class="navbar-position ">
- <div class="col-md-12 ">
+   <div class="col-md-12 ">
     <nav class="navbar navbar-expand-lg navbar-light  ">
-      <div class="container-fluid">
-        <div class="  ">
+      <div class="container">
+        <div class=" m-0 ">
           <%= link_to image_tag("job3.jpg"),root_path,class:"logo-img logo1 navbar-brand " %>
         </div>
 
@@ -17,38 +17,38 @@
 
               <% else %>
               <%= link_to "Login ", new_user_session_path , class:"nav-link" %>
-
               <%  end %>
             </li>
-            <li class="nav-item active">
-              <% if user_signed_in? %>
-
-              <%= link_to "Signout",destroy_user_session_path, data: { turbo_method: :delete } ,class:"nav-link " %>
-
-              <% end %>
-            </li>
+            
 
             <li class="nav-item">
               <%if user_signed_in? %>
               <%= link_to "My Job" , admin_my_jobs_path , class:"nav-link active" %>
-              <%  end %>
-
+              
+              <li class="nav-item">
+                <span><%= link_to 'My Plans', user_plan_path(current_user), class: 'nav-link' %><span>
+              </li>
+              
             </li>
+            <li class= 'nav-item' >
+              <%= link_to "Plan", plans_url , class:"nav-link active" %>
+            </li>
+            <%  end %>
+
 
             <li class="nav-item">
              <%= link_to "All Jobs" , admin_jobs_path ,class:"nav-link active "%>
-
            </li>
            <li class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle active " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Job Category
             </a>
-
+            
 
             <ul class="dropdown-menu m-0" aria-labelledby="navbarDropdown">
 
-              <% @job_categories.each do |job_category| %>        
-              <li><%= link_to job_category.name , admin_job_category_path(job_category),target: :_blank,class:"dropdown-item m-0" %>
+              <% JobCategory.pluck(:id, :name).each do |job_category| %>        
+              <li><%= link_to job_category[1] , admin_job_category_path(job_category[0]),target: :_blank,class:"dropdown-item m-0" %>
               </a></li>
               <% end %>
             </ul> 
@@ -66,6 +66,14 @@
         <% end %>
         <% end %>
       </form>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item active">
+          <% if user_signed_in? %>
+          <%= link_to "Signout",destroy_user_session_path, data: { turbo_method: :delete } ,class:"nav-link btn btn-outline-danger m-2  " %>
+          <% end %>
+        </li>
+      </ul>
     </div>
   </nav>
 </div>

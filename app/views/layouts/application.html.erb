@@ -5,22 +5,48 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag "custom", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
+
+
+  <style>
+    .plan-name{
+      font-family: 'Roboto Slab', serif;
+      background-color: #ea580c;
+      text-align: center;
+      color: #cffafe;
+      font-size: 30px;
+      text-shadow:  0 10px 10px rgb(0 0 0 / 0.2);
+
+    }
+
+    .plan-color{
+      color: #ea580c;
+    }
+    
+  </style>
+
 </head>
 
 <body>
+  <div class="col-md-12">
+    <div class="container">
+      <%= render 'shared/header',class:"navbar-position" %>
+      <% if current_page?('/plans') %>
+      <%= render 'shared/plannavbar', class:"navbar-position" %> 
+      <% end %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
-
-  <%= render 'shared/header',class:"navbar-position" %>
-
- <p class="notice"><%= notice %></p>
- <p class="alert"><%= alert %></p>
-
- <%= yield %>
+      <%= yield %>
+    </div>
+  </div>
 
 
 </body>

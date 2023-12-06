@@ -1,0 +1,8 @@
+<h3>Your Active Plan:</h3>
+<% if current_user.active_plans.any? %>
+  <% current_user.active_plans.each do |user_plan| %>
+    <%= user_plan.plan.name %>
+  <% end %>
+<% else %>
+  You have no active plans.
+<% end %>

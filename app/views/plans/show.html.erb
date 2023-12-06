@@ -1,0 +1,47 @@
+<% plan_ids = current_user.user_plans.pluck(:plan_id).uniq %>
+
+<h4 class="card-title mb-4">Plan Detail </h4>
+<hr>
+ <%= @plan.name %>
+ <%= @plan.price %>
+ <br>
+<% if plan_ids.include? plan.id %>
+  <p class="badge bg-success fs-6">Active Plan</p><br>
+<% else %> 
+  <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#planModal">
+        Get Plan
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="planModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">x
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body fs-5">
+              Are you sure you want to change your plan ?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <%= link_to 'Yes', add_user_plan_path(plan_id: plan.id), class:"btn  btn-primary", remote: true %>
+            </div>
+          </div>
+        </div>  
+      </div>
+<% end %>
+<%= link_to "Back", plans_url, class: "btn btn-light" %>
+
+
+
+
+
+
+
+
+
+
+
+
+

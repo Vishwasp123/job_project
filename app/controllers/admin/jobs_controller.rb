@@ -3,20 +3,21 @@ class Admin::JobsController < ApplicationController
   before_action :set_job , only: %i[show edit update destroy]
 
   def index
-    @job_categories = JobCategory.all
     @q = Job.ransack(params[:q])
-    @jobs = @q.result(distinct: true).page params[:page]
-    @jobs = Job.all
+    @jobs = @q.result(distinct: true).eager_load(:job_category).page params[:page]
+
   end
 
   def new
-    @job_categories = JobCategory.all
+
+    @job_categories = JobCategory.find_each
     @job = Job.new
 
   end
 
   def create
-    @job_categories = JobCategory.all
+
+    @job_categories = JobCategory.find_each
     @job = Job.new(job_params)
     if @job.save
       CrudNotificationMailer.create_notification(@job).deliver_now
@@ -48,9 +49,9 @@ class Admin::JobsController < ApplicationController
   end
 
   def my_jobs
-    @job_categories = JobCategory.all
-    @jobs = Job.where(job_post_id: current_user.id)
-    @jobs = Job.page params[:page]
+    @job_categories = JobCategory.find_each
+    @jobs = Job.includes(:job_category).references(:job_category).where(job_post_id: current_user.id).page params[:page]
+    
   end
 
   
@@ -71,8 +72,9 @@ class Admin::JobsController < ApplicationController
 end
 
 def set_job
-  @job_categories = JobCategory.all
+  @job_categories = JobCategory.find_each
   @job = Job.find(params[:id])
+ 
 end
 
 end
